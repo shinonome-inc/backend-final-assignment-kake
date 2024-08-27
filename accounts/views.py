@@ -13,7 +13,7 @@ class SignupView(CreateView):
     def form_valid(self, form):
         response = super().form_valid(form)
         username = form.cleaned_data["username"]
-        password = form.cleaned_data["password"]
+        password = form.cleaned_data["password1"]
         user = authenticate(self.request, username=username, password=password)  # エラー2: passwardをpasswordに修正
         if user is not None:  # エラー3: 認証成功時のみログインを実行
             login(self.request, user)
