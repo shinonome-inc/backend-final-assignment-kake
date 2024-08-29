@@ -109,6 +109,7 @@ class TestSignupView(TestCase):
         }
         response = self.client.post(self.url, invalid_data)
         self.assertEqual(response.status_code, 200)
+        form = response.context['form']
         self.assertFormError(response, "form", "password1", "このパスワードは短すぎます。最低 8 文字以上必要です。")
 
     def test_failure_post_with_password_similar_to_username(self):
@@ -120,6 +121,7 @@ class TestSignupView(TestCase):
         }
         response = self.client.post(self.url, invalid_data)
         self.assertEqual(response.status_code, 200)
+        form = response.context['form']
         self.assertFormError(response, "form", "password1", "このパスワードは ユーザー名 と似すぎています。")
 
     def test_failure_post_with_only_numbers_password(self):
@@ -131,6 +133,7 @@ class TestSignupView(TestCase):
         }
         response = self.client.post(self.url, invalid_data)
         self.assertEqual(response.status_code, 200)
+        form = response.context['form']
         self.assertFormError(response, "form", "password1", "このパスワードは数字しか使われていません。")
 
     def test_failure_post_with_mismatch_password(self):
