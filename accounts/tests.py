@@ -87,7 +87,7 @@ class TestSignupView(TestCase):
         }
         response = self.client.post(self.url, invalid_data)
         self.assertEqual(response.status_code, 200)
-        self.assertFormError(response, "form", "username", "同じユーザー名が既に登録済みです。")  # 修正点
+        self.assertFormError(response, "form", "username", "同じユーザー名が既に登録済みです。")
 
     def test_failure_post_with_invalid_email(self):
         invalid_data = {
@@ -109,7 +109,7 @@ class TestSignupView(TestCase):
         }
         response = self.client.post(self.url, invalid_data)
         self.assertEqual(response.status_code, 200)
-        self.assertFormError(response, "form", "password1", "このパスワードは短すぎます。")
+        self.assertFormError(response, "form", "password1", "このパスワードは短すぎます。最低 8 文字以上必要です。")
 
     def test_failure_post_with_password_similar_to_username(self):
         invalid_data = {
@@ -120,7 +120,7 @@ class TestSignupView(TestCase):
         }
         response = self.client.post(self.url, invalid_data)
         self.assertEqual(response.status_code, 200)
-        self.assertFormError(response, "form", "password1", "このパスワードはユーザー名に似すぎています。")
+        self.assertFormError(response, "form", "password1", "このパスワードは ユーザー名 と似すぎています。")
 
     def test_failure_post_with_only_numbers_password(self):
         invalid_data = {
@@ -131,7 +131,7 @@ class TestSignupView(TestCase):
         }
         response = self.client.post(self.url, invalid_data)
         self.assertEqual(response.status_code, 200)
-        self.assertFormError(response, "form", "password1", "このパスワードは数字しか含まれていません。")
+        self.assertFormError(response, "form", "password1", "このパスワードは数字しか使われていません。")
 
     def test_failure_post_with_mismatch_password(self):
         invalid_data = {
