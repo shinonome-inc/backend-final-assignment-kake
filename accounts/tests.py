@@ -1,4 +1,4 @@
-from django.contrib.auth import get_user_model
+from django.contrib.auth import SESSION_KEY, get_user_model
 from django.test import TestCase
 from django.urls import reverse
 
@@ -10,6 +10,7 @@ class TestSignupView(TestCase):
     def setUp(self):
         self.url = reverse("accounts:signup")
 
+    # リクエストの送信
     def test_success_get(self):
 
         response = self.client.get(self.url)
@@ -22,6 +23,7 @@ class TestSignupView(TestCase):
         self.assertTemplateUsed(response, "accounts/signup.html")
         # assertTemplateUsed(A, B) = Aの結果とBが一致すれば成功
 
+    # email, username, password1, password2を設定したデータでリクエストの送信
     def test_success_post(self):
         valid_data = {
             "username": "testuser",
@@ -50,20 +52,22 @@ class TestSignupView(TestCase):
         self.assertIn(SESSION_KEY, self.client.session)
         # self.assertIn(A, B) = AがBに含まれているか
 
+    # usernameを設定してないデータでリクエストの送信
+    def test_failure_post_with_empty_username(self):
+        invalid_data = {
+            "username": "",
+            "email": "test@test.com",
+            "password1": "testpassword",
+            "password2": "testpassword",
+        }
 
-def test_failure_post_with_empty_username(self):
-    invalid_data = {
-        "username": "",
-        "email": "test@test.com",
-        "password1": "testpassword",
-        "password2": "testpassword",
-    }
+        response = self.client.post(self.url, invalid_data)
 
-    response = self.client.post(self.url, invalid_data)
+        form = response.context["form"]  # エラー1 content > context に変更
 
-    form = response.context["form"]  # エラー1 content > context に変更
-
-    self.assertEqual(response.status_code, 200)
-    self.assertFalse(User.objects.filter(username=invalid_data["userame"]).exists())  # エラー2 fiter > filter に変更
-    self.assertFalse(form.is_valid())
-    self.assertIn("このフィールドは必須です。", form.errors["username"])
+        self.assertEqual(response.status_code, 200)
+        self.assertFalse(
+            User.objects.filter(username=invalid_data["userame"]).exists()
+        )  # エラー2 fiter > filter に変更
+        self.assertFalse(form.is_valid())
+        self.assertIn("このフィールドは必須です。", form.errors["username"])
