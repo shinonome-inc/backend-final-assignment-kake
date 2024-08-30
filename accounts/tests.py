@@ -67,7 +67,44 @@ class TestSignupView(TestCase):
 
         self.assertEqual(response.status_code, 200)
         self.assertFalse(
-            User.objects.filter(username=invalid_data["userame"]).exists()
-        )  # エラー2 fiter > filter に変更
+            User.objects.filter(username=invalid_data["username"]).exists()  # エラー2 fiter > filter に変更
+        )
         self.assertFalse(form.is_valid())
         self.assertIn("このフィールドは必須です。", form.errors["username"])
+
+    # emailを設定してないデータでリクエストの送信
+    def test_failure_post_with_empty_email(self):
+        invalid_data = {
+            "username": "testuser",
+            "email": "",
+            "password1": "testpassword",
+            "password2": "testpassword",
+        }
+
+        response = self.client.post(self.url, invalid_data)
+
+        form = response.context["form"]
+
+        self.assertEqual(response.status_code, 200)
+        self.assertFalse(User.objects.filter(username=invalid_data["username"]).exists())
+        self.assertFalse(form.is_valid())
+        self.assertIn("このフィールドは必須です。", form.errors["email"])
+
+    # passwordを設定してないデータでリクエストの送信
+    def test_failure_post_with_empty_passward(self):
+        invalid_data = {
+            "username": "testuser",
+            "email": "test@test.com",
+            "password1": "",
+            "password2": "",
+        }
+
+        response = self.client.post(self.url, invalid_data)
+
+        form = response.context["form"]
+
+        self.assertEqual(response.status_code, 200)
+        self.assertFalse(User.objects.filter(username=invalid_data["username"]).exists())
+        self.assertFalse(form.is_valid())
+        self.assertIn("このフィールドは必須です。", form.errors["password1"])
+        self.assertIn("このフィールドは必須です。", form.errors["password2"])
