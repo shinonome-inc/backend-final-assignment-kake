@@ -15,6 +15,5 @@ class SignupView(CreateView):
         username = form.cleaned_data["username"]
         password = form.cleaned_data["password1"]
         user = authenticate(self.request, username=username, password=password)
-        if user is not None:
-            login(self.request, user)
+        login(self.request, user)
         return response
