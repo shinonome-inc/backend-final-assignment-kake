@@ -31,6 +31,7 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
+    "account",
     "django.contrib.admin",
     "django.contrib.auth",
     "django.contrib.contenttypes",
@@ -126,3 +127,14 @@ STATIC_URL = "static/"
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
 AUTH_USER_MODEL = "accounts.User"
+
+LOGIN_URL = "account:login"
+
+LOGOUT_REDIRECT_URL = "account:top"
+# LOGIN_URL	ログインが必要な画面にログインしていないユーザがアクセスした際に自動的にリダイレクトされるページ
+
+LOGIN_REDIRECT_URL = "account:home"
+# LOGIN_REDIRECT_URL	ログイン後に自動的にリダイレクトされるページ
+
+LOGOUT_REDIRECT_URL = "account:top"
+# LOGOUT_REDIRECT_URL	ログアウト後に自動的にリダイレクトされるページ
