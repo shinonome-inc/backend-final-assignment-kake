@@ -3,3 +3,7 @@ source venv/scripts/activate
 
 ターミナル
 . venv/scripts/activate
+
+
+
+    'account',

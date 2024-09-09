@@ -22,4 +22,5 @@ urlpatterns = [
     path("accounts/", include("accounts.urls")),
     path("tweets/", include("tweets.urls")),
     path("", include("welcome.urls")),
+    path("", include("login_logout.urls")),
 ]
