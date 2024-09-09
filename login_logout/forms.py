@@ -1,9 +1,10 @@
-# 初期状態ではlogin_logoutにforms.pyはないため自分で作成する
-
 from django.contrib.auth.forms import AuthenticationForm
 
+# 初期状態ではlogin_logoutにforms.pyはないため自分で作成する
 
-class LoginForm(AuthenticationForm):  # ログインフォーム
+
+# ログインフォーム
+class LoginForm(AuthenticationForm):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         for field in self.fields.values():
