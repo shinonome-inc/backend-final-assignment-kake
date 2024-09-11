@@ -22,5 +22,5 @@ urlpatterns = [
     path("accounts/", include("accounts.urls")),
     path("tweets/", include("tweets.urls")),
     path("", include("welcome.urls")),
-    path("", include("app.urls")),  # appアプリケーションのurls.pyを読み込むように追加
+    path("", include("login.urls")),  # appアプリケーションのurls.pyを読み込むように追加
 ]
