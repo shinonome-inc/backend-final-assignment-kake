@@ -1,8 +1,10 @@
 from django.contrib.auth import authenticate, login
+from django.contrib.auth.mixins import LoginRequiredMixin  # 「LoginRequiredMixin」クラスはログインを必須にするためのもの
+from django.contrib.auth.views import LoginView
 from django.urls import reverse_lazy
-from django.views.generic import CreateView
+from django.views.generic import CreateView, TemplateView
 
-from .forms import SignupForm
+from .forms import LoginForm, SignupForm
 
 
 class SignupView(CreateView):
@@ -17,3 +19,14 @@ class SignupView(CreateView):
         user = authenticate(self.request, username=username, password=password)
         login(self.request, user)
         return response
+
+
+class Login(LoginView):
+    form_class = LoginForm
+    template_name = "registration/login.html"
+    success_url = reverse_lazy("accounts:Profile")
+
+
+class ProfileView(LoginRequiredMixin, TemplateView):
+    login_url = "/login/"
+    template_name = "registration/Profile.html"
