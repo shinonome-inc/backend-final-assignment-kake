@@ -10,7 +10,7 @@ from .forms import LoginForm, SignupForm
 class SignupView(CreateView):
     form_class = SignupForm
     template_name = "accounts/signup.html"
-    success_url = reverse_lazy("tweets:home")
+    success_url = reverse_lazy("accounts:UserProfile")
 
     def form_valid(self, form):
         response = super().form_valid(form)
@@ -21,7 +21,13 @@ class SignupView(CreateView):
         return response
 
 
-class Login(LoginView):
+class LoginView(LoginView):
+    form_class = LoginForm
+    template_name = "registration/login.html"
+    success_url = reverse_lazy("accounts:UserProfile")
+
+
+class LogoutView(LoginView):
     form_class = LoginForm
     template_name = "registration/login.html"
     success_url = reverse_lazy("accounts:UserProfile")
