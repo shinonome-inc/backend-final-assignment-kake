@@ -1,0 +1,10 @@
+{% extends "base.html" %} <!-- ← base.htmlを継承 -->
+
+{% block title %}UserProfile{% endblock %} <!-- ← titleを入れる -->
+
+{% block content %}
+<body>
+    <h1>User Profile</h1>
+    <p>Username: {{ username }}</p>
+</body>
+{% endblock %}
