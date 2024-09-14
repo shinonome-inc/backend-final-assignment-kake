@@ -1,7 +1,18 @@
-{% extends "base.html" %} <!-- ← base.htmlを継承 -->
-
-{% block title %}UserProfile{% endblock %} <!-- ← titleを入れる -->
-
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <title>{% block title %}Profile{% endblock %}</title>
+</head>
+<body>
+  <!-- header  -->
+  <header class="mb-3">
+    <nav>
+      <ul>
+        <li><a href="{% url 'accounts:logout' %}">logout</a></li> <!-- ← accountsフォルダのlogout実行 -->
+      </ul>
+    </nav>
+  </header>
 {% block content %}
 <body>
     <h1>User Profile</h1>
