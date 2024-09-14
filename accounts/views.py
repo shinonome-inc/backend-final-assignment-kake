@@ -1,5 +1,7 @@
 from django.contrib.auth import authenticate, login
-from django.contrib.auth.mixins import LoginRequiredMixin  # 「LoginRequiredMixin」クラスはログインを必須にするためのもの
+from django.contrib.auth.mixins import (
+    LoginRequiredMixin,
+)  # 「LoginRequiredMixin」クラスはログインを必須にするためのもの
 from django.contrib.auth.views import LoginView
 from django.urls import reverse_lazy
 from django.views.generic import CreateView, TemplateView
@@ -33,5 +35,5 @@ class UserProfileView(LoginRequiredMixin, TemplateView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['username'] = self.request.user.username
+        context["username"] = self.request.user.username
         return context
