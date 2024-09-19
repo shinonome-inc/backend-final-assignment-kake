@@ -9,8 +9,8 @@
   <header class="mb-3">
     <nav>
       <ul>
-        <li><a href="{% url 'accounts:logout' %}">Logout</a></li> <!-- ← accountsフォルダのlogout実行 -->
-      </ul>
+        <li><a href="{% url 'tweets:home' %}">Home</a></li>
+        <li><a href="{% url 'accounts:logout' %}">Logout</a></li>
     </nav>
   </header>
 {% block content %}

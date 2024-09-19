@@ -40,7 +40,7 @@ class TestSignupView(TestCase):
         # 1の確認 = tweets/homeにリダイレクトすること
         self.assertRedirects(
             response,
-            reverse("accounts:UserProfile"),
+            reverse("tweets/home"),
             status_code=302,
             target_status_code=200,
         )
@@ -251,6 +251,7 @@ class TestSignupView(TestCase):
         # 「確認用パスワードが一致しません。」などのエラー文は少しでも間違えるとテストでエラーが出るので気を付けること
 
 
+# ログイン機能のテスト
 class TestLoginView(TestCase):
     def setUp(self):
         self.url = reverse(settings.LOGIN_URL)
@@ -297,15 +298,32 @@ class TestLoginView(TestCase):
         self.assertIn("このフィールドは必須です。", form.errors["password"])
 
 
+# ログアウト機能のテスト
 class TestLogoutView(TestCase):
-
     def setUp(self):
-        # ユーザーを作成しログイン
-        self.user = User.objects.create_user(username="testuser", password="testpassword123")
-        self.client.login(username="testuser", password="testpassword123")
-        # ログアウト用の URL を逆引きして保存
-        self.logout_url = reverse("accounts:logout")
+
+        self.url = reverse("accounts:logout")
+
+        # テスト用のユーザーをデータベースに作成
+        self.user = User.objects.create_user(username="testuser", password="testpassword")
+
+        # 作成したユーザーでログイン
+        self.client.login(username="testuser", password="testpassword")
 
     def test_success_post(self):
-        response = self.client.post(self.logout_url)
-        self.assertRedirects(response, "/accounts/login/")
+
+        # POSTリクエストをログアウトURLに送信(詳しいことは分からない)
+        response = self.client.post(self.url)
+
+        # 40行目と同じこと
+        # リダイレクト先がsetting.pyのLOGOUT_REDIRECT_URLである"accounts:login"であることを確認
+        self.assertRedirects(
+            response,
+            reverse(settings.LOGOUT_REDIRECT_URL),
+            status_code=302,
+            target_status_code=200,
+        )
+
+        # セッションからSESSION_KEYが削除されているか確認
+        # ユーザーがログアウトされたことを検証
+        self.assertNotIn(SESSION_KEY, self.client.session)

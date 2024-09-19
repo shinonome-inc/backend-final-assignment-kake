@@ -1,7 +1,32 @@
-{% extends "base.html" %} ← base.htmlを継承
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <title>{% block title %}Twitter Clone{% endblock %}</title>
+</head>
+<body>
+  <!-- header  -->
+  <header class="mb-3">
+    <nav>
+      <ul>
+        <li><a href="{% url 'accounts:userprofile' %}">User Profile</a></li> <!-- ← accountsフォルダのsignup実行 -->
+        <li><a href="{% url 'accounts:login' %}">Logout</a></li> <!-- ← accountsフォルダのlogin実行 -->
+      </ul>
+    </nav>
+  </header>
+  <!-- /header  -->
 
-{% block title %}Home{% endblock %} ← titleを入れる
+  <!-- main  -->
+  <main>
+  {% block content %}
+  {% endblock %}
+  </main>
+  <!-- /main  -->
+</body>
+</html>
 
-{% block content %}
-<h1>Homeです</h1>
-{% endblock %}
+<html>
+    <body>
+        <h1>Homeです</h1>
+    </body>
+</html>
