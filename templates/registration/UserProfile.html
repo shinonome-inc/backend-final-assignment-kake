@@ -10,12 +10,12 @@
     <nav>
       <ul>
         <li><a href="{% url 'tweets:home' %}">Home</a></li>
-        <li><a href="{% url 'accounts:logout' %}">Logout</a></li>
+        <li><a href="{% url 'accounts:login' %}">Logout</a></li>
     </nav>
   </header>
 {% block content %}
 <body>
     <h1>User Profile</h1>
-    <p>Username: {{ username }}</p>
+    <p>username : {{ user.get_username }} </p>
 </body>
 {% endblock %}
