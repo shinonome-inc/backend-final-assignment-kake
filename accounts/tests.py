@@ -40,7 +40,7 @@ class TestSignupView(TestCase):
         # 1の確認 = tweets/homeにリダイレクトすること
         self.assertRedirects(
             response,
-            reverse("tweets/home/"),
+            reverse("tweets:home/"),
             status_code=302,
             target_status_code=200,
         )
