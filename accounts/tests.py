@@ -1,8 +1,7 @@
+from django.conf import settings
 from django.contrib.auth import SESSION_KEY, get_user_model
 from django.test import TestCase
 from django.urls import reverse
-
-from mysite import settings
 
 User = get_user_model()
 
@@ -37,10 +36,10 @@ class TestSignupView(TestCase):
         # ユーザーがフォームにデータを打ち込んでユーザー登録ボタンを押した操作を表している
         response = self.client.post(self.url, valid_data)  # エラー2 valid_date > valid_data に変更
 
-        # 1の確認 = tweets/homeにリダイレクトすること
+        # 1の確認 = tweets/homeにリダイレクトするこ
         self.assertRedirects(
             response,
-            reverse("tweets:home/"),
+            reverse(settings.LOGIN_REDIRECT_URL),
             status_code=302,
             target_status_code=200,
         )
