@@ -1,10 +1,10 @@
 from django.conf import settings
-from django.contrib.auth import authenticate, login
+from django.contrib.auth import authenticate, get_user_model, login
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.urls import reverse_lazy
-from django.views.generic import CreateView, TemplateView
+from django.views.generic import CreateView, DetailView
 
-from .forms import LoginForm, SignupForm
+from .forms import SignupForm
 
 
 class SignupView(CreateView):
@@ -21,6 +21,12 @@ class SignupView(CreateView):
         return response
 
 
-class UserProfileView(LoginRequiredMixin, TemplateView):
-    form_class = LoginForm
-    template_name = "registration/UserProfile.html"
+class UserProfileView(LoginRequiredMixin, DetailView):
+
+    template_name = "accounts/UserProfile.html"
+
+    model = get_user_model()  # カスタムユーザーモデルを使用
+
+    # URLから'slug'（username）を使ってユーザーを取得する
+    slug_field = "username"
+    slug_url_kwarg = "username"

@@ -1,32 +1,20 @@
-<!DOCTYPE html>
-<html lang="ja">
-<head>
-  <meta charset="UTF-8">
-  <title>{% block title %}Twitter Clone{% endblock %}</title>
-</head>
-<body>
-  <!-- header  -->
-  <header class="mb-3">
-    <nav>
-      <ul>
-        <li><a href="{% url 'accounts:userprofile' %}">User Profile</a></li> <!-- ← accountsフォルダのsignup実行 -->
-        <li><a href="{% url 'accounts:login' %}">Logout</a></li> <!-- ← accountsフォルダのlogin実行 -->
-      </ul>
-    </nav>
-  </header>
-  <!-- /header  -->
+{% extends "base.html" %}
+{% block title %}Home{% endblock %}
 
-  <!-- main  -->
-  <main>
-  {% block content %}
-  {% endblock %}
-  </main>
-  <!-- /main  -->
-</body>
-</html>
+{% block content %}
+  <body>
+    <ul>
+      <li><a href="{% url 'accounts:userprofile' user.username %}">User Profile</a></li>
 
-<html>
-    <body>
-        <h1>Homeです</h1>
-    </body>
-</html>
+      <li><a href="{% url 'accounts:logout' %}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">Logout</a></li>
+      
+      <form id="logout-form" method="POST" action="{% url 'accounts:logout' %}" style="display: none;">
+        {% csrf_token %}
+      </form>
+    </ul>
+    
+    <h1>Homeです</h1>
+  
+  </body>
+
+{% endblock %}

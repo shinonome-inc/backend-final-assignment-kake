@@ -281,6 +281,7 @@ class TestLoginView(TestCase):
         }
         response = self.client.post(self.url, invalid_login_data)
         form = response.context["form"]
+        self.assertNotIn(SESSION_KEY, self.client.session)
         self.assertIn(
             "正しいユーザー名とパスワードを入力してください。どちらのフィールドも大文字と小文字は区別されます。",
             form.errors["__all__"],
@@ -294,6 +295,7 @@ class TestLoginView(TestCase):
         response = self.client.post(self.url, invalid_login_data)
         form = response.context["form"]
         self.assertEqual(response.status_code, 200)
+        self.assertNotIn(SESSION_KEY, self.client.session)
         self.assertIn("このフィールドは必須です。", form.errors["password"])
 
 
