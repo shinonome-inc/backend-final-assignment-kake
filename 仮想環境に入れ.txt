@@ -1,7 +1,0 @@
-basy
-source venv/scripts/activate
-
-ターミナル
-. venv/scripts/activate
-
-ぜったい最初にやること
