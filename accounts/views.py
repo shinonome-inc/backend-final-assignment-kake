@@ -6,6 +6,8 @@ from django.views.generic import CreateView, DetailView
 
 from .forms import SignupForm
 
+User = get_user_model()  # グローバル変数としてカスタムユーザーモデルを使用
+
 
 class SignupView(CreateView):
     form_class = SignupForm
@@ -25,7 +27,7 @@ class UserProfileView(LoginRequiredMixin, DetailView):
 
     template_name = "accounts/UserProfile.html"
 
-    model = get_user_model()  # カスタムユーザーモデルを使用
+    model = User  # クラス内でグローバル変数を使用
 
     # URLから'slug'（username）を使ってユーザーを取得する
     slug_field = "username"

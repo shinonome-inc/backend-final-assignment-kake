@@ -8,11 +8,8 @@
   <!-- header  -->
   <header class="mb-3">
     <nav>
-      <ul>
-				<li><a href="{% url 'welcome:welcome' %}">Twitter Clone</a></li> 
-        <li><a href="{% url 'accounts:signup' %}">Sign up</a></li> <!-- ← accountsフォルダのsignup実行 -->
-        <li><a href="{% url 'accounts:login' %}">Login</a></li> <!-- ← accountsフォルダのlogin実行 -->
-      </ul>
+      {% block ui %}
+      {% endblock %}
     </nav>
   </header>
   <!-- /header  -->

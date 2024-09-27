@@ -2,6 +2,13 @@
 
 {% block title %}Sign Up{% endblock %} <!-- ← titleを入れる -->
 
+{% block ui %}
+<ul>
+	<li><a href="{% url 'welcome:welcome' %}">Tweeter Clone</a></li>
+    <li><a href="{% url 'accounts:login' %}">Login</a></li> <!-- ← accountsフォルダのlogin実行 -->
+</ul>
+{% endblock %}
+
 {% block content %}
 <form method="post">
 	{{ form.as_p }}
