@@ -4,12 +4,6 @@ from django.contrib.auth.admin import UserAdmin as BaseUserAdmin
 
 User = get_user_model()
 
-# Userがすでに登録されているかを確認してからunregister
-try:
-    admin.site.unregister(User)
-except admin.sites.NotRegistered:
-    pass  # すでに登録されていない場合はエラーを無視する
-
 
 class CustomUserAdmin(BaseUserAdmin):
     # list_displayは、管理画面での一覧表示時に表示されるフィールドを指定するオプション
