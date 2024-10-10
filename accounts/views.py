@@ -25,7 +25,7 @@ class SignupView(CreateView):
 
 class UserProfileView(LoginRequiredMixin, DetailView):
 
-    template_name = "accounts/userprofile.html"
+    template_name = "accounts/user_profile.html"
 
     model = User  # クラス内でグローバル変数を使用
 
