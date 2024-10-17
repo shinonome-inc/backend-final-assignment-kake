@@ -4,18 +4,22 @@
 
 {% block ui %}
 <ul>
+  <li><a href="{% url 'tweets:create' %}">Create Tweet</a></li>
+
   <li><a href="{% url 'accounts:userprofile' user.username %}">User Profile</a></li>
 
-  <li><a href="{% url 'accounts:logout' %}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">Logout</a></li>
-  
+  <li><a href="{% url 'accounts:logout' %}"
+      onclick="event.preventDefault(); document.getElementById('logout-form').submit();">Logout</a></li>
+
   <form id="logout-form" method="POST" action="{% url 'accounts:logout' %}" style="display: none;">
     {% csrf_token %}
   </form>
 </ul>
 {% endblock %}
 {% block content %}
-  <body>
-    <h1>Homeです</h1>
-  </body>
+
+<body>
+  <h1>Homeです</h1>
+</body>
 
 {% endblock %}
