@@ -57,7 +57,7 @@ ROOT_URLCONF = "mysite.urls"
 TEMPLATES = [
     {
         "BACKEND": "django.template.backends.django.DjangoTemplates",
-        "DIRS": [BASE_DIR / "templates"],
+        "DIRS": [BASE_DIR / "templates"BASE_DIR / "templates"],
         "APP_DIRS": True,
         "OPTIONS": {
             "context_processors": [
@@ -126,3 +126,12 @@ STATIC_URL = "static/"
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
 AUTH_USER_MODEL = "accounts.User"
+
+AUTH_USER_MODEL = "accounts.User"
+
+# ログイン・ログアウト機能
+LOGIN_URL = "accounts:login"
+
+LOGIN_REDIRECT_URL = "tweets:home"
+
+LOGOUT_REDIRECT_URL = "accounts:login"
