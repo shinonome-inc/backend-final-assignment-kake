@@ -20,6 +20,10 @@ class TweetCreateView(LoginRequiredMixin, CreateView):
     success_url = '/tweets/home/' 
     fields = ['title', 'content']
 
-    def form_valid(self, form):
+    def form_valid(self, form): # バリデーション通過時にオーバライドする
+        # 作成されたツイートの投稿者を現在ログイン中のユーザにする
         form.instance.user = self.request.user
-        return super().form_valid(form)
+        return super().form_valid(form) # 通常の処理に戻す
+
+class TweetDetailView():
+    

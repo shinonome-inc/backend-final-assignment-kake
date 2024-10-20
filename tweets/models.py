@@ -8,7 +8,7 @@ class Post(models.Model):
     # 本文
     content = models.TextField()
     # 投稿者
-    user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)  # 修正済み
+    user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
     # 投稿日時
     created_at = models.DateTimeField(auto_now_add=True)
 
