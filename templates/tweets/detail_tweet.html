@@ -1,4 +1,24 @@
 {% extends "base.html" %}
+
+{% block ui %}
+<ul>
+    <li><a href="{% url 'tweets:home' %}">Home</a></li>
+
+    <li><a href="{% url 'tweets:postlist' %}">List</a></li>
+
+    <li><a href="{% url 'tweets:create' %}">Create Tweet</a></li>
+
+    <li><a href="{% url 'accounts:userprofile' user.username %}">User Profile</a></li>
+
+    <li><a href="{% url 'accounts:logout' %}"
+            onclick="event.preventDefault(); document.getElementById('logout-form').submit();">Logout</a></li>
+
+    <form id="logout-form" method="POST" action="{% url 'accounts:logout' %}" style="display: none;">
+        {% csrf_token %}
+    </form>
+</ul>
+{% endblock %}
+
 {% block content %}
 <h1>{{ object.title }}</h1><!--タイトルの取得-->
 <p>{{ object.content }}</p><!--タイトルの取得-->

@@ -1,7 +1,7 @@
 {% extends 'base.html' %}
 {% block ui %}
 <ul>
-    <li><a href="{% url 'tweets:postlist' %}">List</a></li>
+    <li><a href="{% url 'tweets:home' %}">Home</a></li>
 
     <li><a href="{% url 'tweets:create' %}">Create Tweet</a></li>
 
@@ -21,10 +21,7 @@
 <ul>
     {% for tweet in tweets %} <!-- forループで全部表示させる -->
     <li>
-        <strong><small>{{ tweet.user }}</small></strong><br>
-
-        {{ tweet.title }}: {{ tweet.content }} <br>
-
+        <strong><small>{{ tweet.user }}</small></strong> <strong>「 {{ tweet.title }} 」</strong><br>
         <small>{{ tweet.created_at }}</small>
         <a href="{% url 'tweets:detail' tweet.pk %}">詳細</a>
 

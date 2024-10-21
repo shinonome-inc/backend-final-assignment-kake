@@ -17,9 +17,9 @@ class HomeView(LoginRequiredMixin, TemplateView):
 
 class TweetCreateView(LoginRequiredMixin, CreateView):
     model = Post
-    template_name = 'tweets/create_tweet.html'
-    success_url = reverse_lazy('tweets:postlist')  # やることやったらここに移動
-    fields = ['title', 'content']
+    template_name = "tweets/create_tweet.html"
+    success_url = reverse_lazy("tweets:postlist")  # やることやったらここに移動
+    fields = ["title", "content"]
 
     def form_valid(self, form):  # バリデーション通過時にオーバライドする
         # 作成されたツイートの投稿者を現在ログイン中のユーザにする
@@ -29,8 +29,8 @@ class TweetCreateView(LoginRequiredMixin, CreateView):
 
 class PostListView(LoginRequiredMixin, ListView):
     model = Post
-    template_name = 'tweets/list.html'
-    context_object_name = 'tweets'
+    template_name = "tweets/list.html"
+    context_object_name = "tweets"
 
 
 class TweetDetailView(LoginRequiredMixin, DetailView):
@@ -40,12 +40,12 @@ class TweetDetailView(LoginRequiredMixin, DetailView):
 
 class TweetUpdateView(UpdateView):
     model = Post
-    fields = ['title', 'content']
-    template_name = 'tweets/edit_tweet.html'
-    success_url = reverse_lazy('tweets:postlist')  # やることやったらここに移動
+    fields = ["title", "content"]
+    template_name = "tweets/edit_tweet.html"
+    success_url = reverse_lazy("tweets:postlist")  # やることやったらここに移動
 
 
 class TweetDeleteView(LoginRequiredMixin, DeleteView):
     model = Post
     template_name = "tweets/delete_tweet.html"
-    success_url = reverse_lazy('tweets:postlist')  # やることやったらここに移動
+    success_url = reverse_lazy("tweets:postlist")  # やることやったらここに移動
