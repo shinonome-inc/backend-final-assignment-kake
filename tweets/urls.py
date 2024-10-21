@@ -9,7 +9,8 @@ urlpatterns = [
     path('create/', views.TweetCreateView.as_view(), name='create'),
     path("postlist/", views.PostListView.as_view(), name="postlist"),
     path('<int:pk>/', views.TweetDetailView.as_view(), name='detail'),
-    # path('<int:pk>/delete/', views.TweetDeleteView.as_view(), name='delete'),
+    path('<int:pk>/delete/', views.TweetDeleteView.as_view(), name='delete'),
+    path("<int:pk>/update", views.TweetUpdateView.as_view(), name="update"),
     # path('<int:pk>/like/', views.LikeView, name='like'),
     # path('<int:pk>/unlike/', views.UnlikeView, name='unlike'),
 ]

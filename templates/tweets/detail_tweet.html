@@ -2,4 +2,8 @@
 {% block content %}
 <h1>{{ object.title }}</h1><!--タイトルの取得-->
 <p>{{ object.content }}</p><!--タイトルの取得-->
+
+<a href="{% url 'tweets:update' object.pk %}">編集</a>
+<a href="{% url 'tweets:delete' object.pk %}">削除</a>
+
 {% endblock %}

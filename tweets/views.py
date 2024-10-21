@@ -1,5 +1,6 @@
 from django.contrib.auth.mixins import LoginRequiredMixin
-from django.views.generic import CreateView, DetailView, ListView, TemplateView
+from django.urls import reverse_lazy
+from django.views.generic import CreateView, DeleteView, DetailView, ListView, TemplateView, UpdateView
 
 from .models import Post
 
@@ -17,7 +18,7 @@ class HomeView(LoginRequiredMixin, TemplateView):
 class TweetCreateView(LoginRequiredMixin, CreateView):
     model = Post
     template_name = 'tweets/create_tweet.html'
-    success_url = '/tweets/home/'
+    success_url = reverse_lazy('tweets:postlist')  # やることやったらここに移動
     fields = ['title', 'content']
 
     def form_valid(self, form):  # バリデーション通過時にオーバライドする
@@ -41,3 +42,16 @@ class PostListView(LoginRequiredMixin, ListView):
 class TweetDetailView(LoginRequiredMixin, DetailView):
     model = Post
     template_name = "tweets/detail_tweet.html"
+
+
+class TweetUpdateView(UpdateView):
+    model = Post
+    fields = ['title', 'content']
+    template_name = 'tweets/edit_tweet.html'
+    success_url = reverse_lazy('tweets:postlist')  # やることやったらここに移動
+
+
+class TweetDeleteView(LoginRequiredMixin, DeleteView):
+    model = Post
+    template_name = "tweets/delete_tweet.html"
+    success_url = reverse_lazy('tweets:postlist')  # やることやったらここに移動
