@@ -1,17 +1,23 @@
 {% extends "base.html" %} <!-- ← base.htmlを継承 -->
 
-{% block title %}{% endblock %} <!-- ← titleを入れる -->
+{% block title %}User Profile{% endblock %} <!-- ← titleを入れる -->
 
 {% block ui %}
 <ui>
+    <ul>
+        <li><a href="{% url 'tweets:home' %}">Home</a></li>
 
-    <li><a href="{% url 'tweets:home' %}">Home</a></li>
+        <li><a href="{% url 'tweets:postlist' %}">List</a></li>
 
-    <li><a href="{% url 'accounts:logout' %}"
-            onclick="event.preventDefault(); document.getElementById('logout-form').submit();">Logout</a></li>
+        <li><a href="{% url 'tweets:create' %}">Create Tweet</a></li>
 
-    <form id="logout-form" method="POST" action="{% url 'accounts:logout' %}" style="display: none;">
-        {% csrf_token %}
+        <li><a href="{% url 'accounts:logout' %}"
+                onclick="event.preventDefault(); document.getElementById('logout-form').submit();">Logout</a></li>
+
+        <form id="logout-form" method="POST" action="{% url 'accounts:logout' %}" style="display: none;">
+            {% csrf_token %}
+        </form>
+    </ul>
 </ui>
 {% endblock %}
 
