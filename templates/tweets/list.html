@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+{% block ui %}
+<ul>
+    <li><a href="{% url 'tweets:home' %}">Home</a></li>
+
+    <li><a href="{% url 'tweets:create' %}">Create Tweet</a></li>
+
+    <li><a href="{% url 'accounts:userprofile' user.username %}">User Profile</a></li>
+
+    <li><a href="{% url 'accounts:logout' %}"
+            onclick="event.preventDefault(); document.getElementById('logout-form').submit();">Logout</a></li>
+
+    <form id="logout-form" method="POST" action="{% url 'accounts:logout' %}" style="display: none;">
+        {% csrf_token %}
+    </form>
+</ul>
+{% endblock %}
+{% block content %}
+<h2>Tweets List</h2>
+<a href="{% url 'tweets:create' %}">New Create Tweet</a>
+<ul>
+    {% for tweet in tweets %} <!-- forループで全部表示させる -->
+    <li>
+        <strong><small>{{ tweet.user }}</small></strong> <strong>「 {{ tweet.title }} 」</strong><br>
+        <small>{{ tweet.created_at }}</small>
+        <a href="{% url 'tweets:detail' tweet.pk %}">詳細</a>
+
+    </li>
+    {% endfor %}
+</ul>
+{% endblock %}

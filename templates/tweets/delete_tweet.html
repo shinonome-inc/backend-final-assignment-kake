@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+
+{% block ui %}
+<ul>
+    <li><a href="{% url 'tweets:home' %}">Home</a></li>
+
+    <li><a href="{% url 'tweets:postlist' %}">List</a></li>
+
+    <li><a href="{% url 'tweets:create' %}">Create Tweet</a></li>
+
+    <li><a href="{% url 'accounts:userprofile' user.username %}">User Profile</a></li>
+
+    <li><a href="{% url 'accounts:logout' %}"
+            onclick="event.preventDefault(); document.getElementById('logout-form').submit();">Logout</a></li>
+
+    <form id="logout-form" method="POST" action="{% url 'accounts:logout' %}" style="display: none;">
+        {% csrf_token %}
+    </form>
+</ul>
+{% endblock %}
+
+{% block content %}
+<form method="post">
+    {% csrf_token %}
+    <h1>このツイートを削除します</h1>
+    <button type="submit">確定</button>
+</form>
+<br>
+{% endblock %}
