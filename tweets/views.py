@@ -1,5 +1,5 @@
 from django.contrib.auth.mixins import LoginRequiredMixin
-from django.views.generic import CreateView, ListView, TemplateView
+from django.views.generic import CreateView, DetailView, ListView, TemplateView
 
 from .models import Post
 
@@ -36,3 +36,8 @@ class PostListView(LoginRequiredMixin, ListView):
         context["Posts"] = Post.objects.all()
         context["hello"] = "Hello World"
         return context
+
+
+class TweetDetailView(LoginRequiredMixin, DetailView):
+    model = Post
+    template_name = "tweets/detail_tweet.html"

@@ -9,6 +9,8 @@
         {{ tweet.title }}: {{ tweet.content }} <br>
 
         <small>{{ tweet.created_at }}</small>
+        <a href="{% url 'tweets:detail' tweet.pk %}">編集</a>
+
     </li>
     {% endfor %}
 </ul>
