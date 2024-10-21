@@ -1,5 +1,5 @@
 from django.contrib.auth.mixins import LoginRequiredMixin
-from django.views.generic import CreateView, TemplateView
+from django.views.generic import CreateView, ListView, TemplateView
 
 from .models import Post
 
@@ -17,13 +17,22 @@ class HomeView(LoginRequiredMixin, TemplateView):
 class TweetCreateView(LoginRequiredMixin, CreateView):
     model = Post
     template_name = 'tweets/create_tweet.html'
-    success_url = '/tweets/home/' 
+    success_url = '/tweets/home/'
     fields = ['title', 'content']
 
-    def form_valid(self, form): # バリデーション通過時にオーバライドする
+    def form_valid(self, form):  # バリデーション通過時にオーバライドする
         # 作成されたツイートの投稿者を現在ログイン中のユーザにする
         form.instance.user = self.request.user
-        return super().form_valid(form) # 通常の処理に戻す
+        return super().form_valid(form)  # 通常の処理に戻す
 
-class TweetDetailView():
-    
+
+class PostListView(LoginRequiredMixin, ListView):
+    model = Post
+    template_name = 'tweets/list.html'
+    context_object_name = 'tweets'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context["Posts"] = Post.objects.all()
+        context["hello"] = "Hello World"
+        return context

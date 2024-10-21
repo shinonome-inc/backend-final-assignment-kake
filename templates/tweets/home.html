@@ -4,6 +4,8 @@
 
 {% block ui %}
 <ul>
+  <li><a href="{% url 'tweets:postlist' %}">List</a></li>
+
   <li><a href="{% url 'tweets:create' %}">Create Tweet</a></li>
 
   <li><a href="{% url 'accounts:userprofile' user.username %}">User Profile</a></li>

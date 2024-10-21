@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+{% block content %}
+<h2>Recent Tweets</h2>
+<ul>
+    {% for tweet in tweets %} <!-- forループで全部表示させる -->
+    <li>
+        <strong><small>{{ tweet.user }}</small></strong><br>
+
+        {{ tweet.title }}: {{ tweet.content }} <br>
+
+        <small>{{ tweet.created_at }}</small>
+    </li>
+    {% endfor %}
+</ul>
+<a href="{% url 'tweets:create' %}">New Tweet</a>
+{% endblock %}
