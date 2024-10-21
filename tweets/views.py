@@ -32,12 +32,6 @@ class PostListView(LoginRequiredMixin, ListView):
     template_name = 'tweets/list.html'
     context_object_name = 'tweets'
 
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        context["Posts"] = Post.objects.all()
-        context["hello"] = "Hello World"
-        return context
-
 
 class TweetDetailView(LoginRequiredMixin, DetailView):
     model = Post
